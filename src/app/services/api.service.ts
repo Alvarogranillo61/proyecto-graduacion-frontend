@@ -111,5 +111,17 @@ export class ApiService {
       })
     );
   }
+
+  register(username: string, email:string, password: string) {
+
+    return this.http.post(`${this.API_URL}/auth/register`, {username, email, password}).pipe(
+      // @ts-ignore
+      catchError((err: HttpErrorResponse) => {
+        this.toast.error(err.error.message, '', {
+          timeOut: 1000
+        });
+      })
+    );
+  }
 }
 
