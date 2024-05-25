@@ -39,7 +39,14 @@ export class ApiService {
   }
 
   login(email: string, password: string): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${this.API_URL}/auth/login`, { email, password });
+    return this.http.post<{ token: string }>(`${this.API_URL}/auth/login`, { email, password })
+      .pipe(
+        tap(response => {
+          this.token = response.token;
+          this.jwtToken$.next(this.token);
+          localStorage.setItem('act', btoa(this.token));
+        })
+      );
   }
 
   logout() {
@@ -61,15 +68,15 @@ export class ApiService {
     });
   }
 
-  updateStatus(statusValue: string, todoId: number) {
-    return this.http.patch(`${this.API_URL}/todos/${todoId}`, { status: statusValue }, {
+  updateFav(todoId: number, fav: number): Observable<any> {
+    return this.http.patch(`${this.API_URL}/todos/${todoId}/fav`, { fav }, {
       headers: {
         Authorization: `Bearer ${this.token}`
       }
     }).pipe(
       tap(res => {
         if (res) {
-          this.toast.success('Status updated successfully', '', {
+          this.toast.success('Favorite status updated successfully', '', {
             timeOut: 1000
           });
         }
@@ -94,5 +101,21 @@ export class ApiService {
   register(username: string, email: string, password: string): Observable<any> {
     const payload = { username, email, password };
     return this.http.post(`${this.API}/register`, payload);
+  }
+
+  getFavRecipes(): Observable<any> {
+    return this.http.get(`${this.API_URL}/todos/favorite`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`
+      }
+    });
+  }
+
+  getRecipesByMealAndCalories(meal: string, calories: number): Observable<any> {
+    return this.http.get(`${this.API_URL}/todos/meal/${meal}/calories/${calories}`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`
+      }
+    });
   }
 }

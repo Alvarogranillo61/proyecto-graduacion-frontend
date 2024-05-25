@@ -2,7 +2,7 @@
   <div class="container d-flex">
     <span routerLink="/" style="cursor: pointer;">Calories Recipes</span>
     <span class="spacer"></span>
-    <div class="d-flex justify-content-around icons" style="width: 100px;" *ngIf="showMenu">
+    <div class="d-flex justify-content-around icons" style="width: 100px;" *ngIf="!isLoggedIn">
       <div class="d-flex align-items-center mr-2 px-2">
         <span routerLink="/login">Login</span>
         <mat-icon routerLink="/login">login</mat-icon>
@@ -14,17 +14,22 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-around icons align-items-center" style="width: 100px;" *ngIf="!showMenu">
+    <div class="d-flex justify-content-around icons align-items-center" style="width: 100px;" *ngIf="isLoggedIn">
       <div class="px-2">
         <h3>Welcome</h3>
       </div>
-      <div class="px-2">
+      <div class="px-2" (click)="logout()">
         <mat-icon>logout</mat-icon>
       </div>
     </div>
   </div>
 </mat-toolbar>
 
-<div class="container py-3">
+<div class="container py-3" *ngIf="!isLoggedIn">
   <router-outlet></router-outlet>
 </div>
+
+<app-sidebar *ngIf="isLoggedIn">
+  <!-- Aquí puedes colocar el contenido principal de tu aplicación -->
+  <router-outlet></router-outlet>
+</app-sidebar>
