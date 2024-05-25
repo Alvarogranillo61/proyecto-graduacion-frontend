@@ -1,45 +1,36 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 import { ApiService } from '../services/api.service';
+
+export interface FavoriteRecipe {
+  title: string;
+  description: string;
+  calories: number;
+}
 
 @Component({
   selector: 'app-favorites',
-  templateUrl: './favorites.component.html',
-  styleUrls: ['./favorites.component.scss']
+  styleUrls: ['favorites.component.scss'],
+  templateUrl: 'favorites.component.html',
+  standalone: true,
+  imports: [MatButtonModule, MatTableModule],
 })
-export class FavoritesComponent implements OnInit, AfterViewInit {
-  favorites: any[] = [];
-  displayedColumns: string[] = ['title', 'description', 'calories', 'actions'];
-  dataSource = new MatTableDataSource<any>();
+export class FavoritesComponent implements OnInit {
+  displayedColumns: string[] = ['title', 'description', 'calories'];
+  dataSource: FavoriteRecipe[] = [];
 
-  constructor(private apiService: ApiService, private _liveAnnouncer: LiveAnnouncer) {}
-
-  @ViewChild(MatSort) sort!: MatSort;
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.getFavorites();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }
-
   getFavorites(): void {
-    this.apiService.getFavRecipes().subscribe((data: any[]) => {
-      this.favorites = data;
-      this.dataSource.data = data;
+    this.apiService.getFavRecipes().subscribe((data: FavoriteRecipe[]) => {
+      this.dataSource = data;
     }, error => {
       console.error('Error fetching favorite recipes', error);
     });
-  }
-
-  announceSortChange(sortState: Sort) {
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
   }
 }
