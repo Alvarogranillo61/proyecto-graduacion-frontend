@@ -26,6 +26,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { ApiService } from './services/api.service';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,7 @@ import { MatTableModule } from '@angular/material/table';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSortModule,
     FormsModule,
     MatCardModule,
     MatButtonModule,
@@ -64,7 +69,7 @@ import { MatTableModule } from '@angular/material/table';
     }),
     HttpClientModule
   ],
-  providers: [],
+  providers: [ApiService, LiveAnnouncer, provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

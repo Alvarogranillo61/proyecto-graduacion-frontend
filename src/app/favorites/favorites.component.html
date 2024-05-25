@@ -1,25 +1,30 @@
 <div class="favorites-container">
   <h2>Favorite Recipes</h2>
-  <table mat-table [dataSource]="favorites" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!-- Title Column -->
     <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
       <td mat-cell *matCellDef="let element"> {{element.title}} </td>
     </ng-container>
 
+    <!-- Description Column -->
     <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
       <td mat-cell *matCellDef="let element"> {{element.description}} </td>
     </ng-container>
 
+    <!-- Calories Column -->
     <ng-container matColumnDef="calories">
-      <th mat-header-cell *matHeaderCellDef> Calories </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Calories </th>
       <td mat-cell *matCellDef="let element"> {{element.calories}} </td>
     </ng-container>
 
+    <!-- Actions Column -->
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-button >View</button>
+        <button mat-button>View</button>
       </td>
     </ng-container>
 

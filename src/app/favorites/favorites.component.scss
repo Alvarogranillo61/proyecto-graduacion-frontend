@@ -1,21 +1,28 @@
+
+
+
 .favorites-container {
   padding: 20px;
 }
 
-.demo-table {
+table {
   width: 100%;
+  border-collapse: collapse;
 }
 
-.mat-mdc-row .mat-mdc-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  cursor: pointer;
+th.mat-sort-header-sorted {
+  color: black;
 }
 
-.mat-mdc-row:hover .mat-mdc-cell {
-  border-color: currentColor;
+.mat-header-cell, .mat-cell {
+  padding: 8px;
+  text-align: left;
 }
 
-.demo-row-is-clicked {
+.mat-header-cell {
   font-weight: bold;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #f5f5f5;
 }
