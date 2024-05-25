@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { DinnerComponent } from './dinner/dinner.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,13 @@ const routes: Routes = [
   },
   {
     path:'dinner',
-    component:DinnerComponent
+    component:DinnerComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'favorites',
+    component:FavoritesComponent,
+    canActivate: [AuthGuard]
   }
 
 ];

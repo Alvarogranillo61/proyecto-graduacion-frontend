@@ -8,6 +8,7 @@ import { ApiService } from './services/api.service';
 })
 export class AppComponent implements OnInit {
   isLoggedIn = false;
+  isSidenavOpened = false;
 
   constructor(private apiService: ApiService) {}
 
@@ -15,6 +16,10 @@ export class AppComponent implements OnInit {
     this.apiService.jwtUserToken.subscribe(token => {
       this.isLoggedIn = !!token;
     });
+  }
+
+  toggleSidenav() {
+    this.isSidenavOpened = !this.isSidenavOpened;
   }
 
   logout() {

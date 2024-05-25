@@ -9,7 +9,7 @@ export class SidebarComponent {
   menuItems = [
     { label: 'Home', icon: 'home', link: '/home' },
     { label: 'Todos', icon: 'list', link: '/todos' },
-    { label: 'Favorites', icon: 'favorite', link: '/favorites' },
+    { label: 'Favorites', icon: 'favorite', link: '/' },
     // Añade más elementos del menú según sea necesario
   ];
 }

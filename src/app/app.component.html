@@ -1,4 +1,7 @@
 <mat-toolbar color="primary">
+  <button mat-icon-button *ngIf="isLoggedIn" (click)="toggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
   <div class="container d-flex">
     <span routerLink="/" style="cursor: pointer;">Calories Recipes</span>
     <span class="spacer"></span>
@@ -25,11 +28,18 @@
   </div>
 </mat-toolbar>
 
-<div class="container py-3" *ngIf="!isLoggedIn">
-  <router-outlet></router-outlet>
-</div>
-
-<app-sidebar *ngIf="isLoggedIn">
-  <!-- Aquí puedes colocar el contenido principal de tu aplicación -->
-  <router-outlet></router-outlet>
-</app-sidebar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" [(opened)]="isSidenavOpened" *ngIf="isLoggedIn">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" (click)="sidenav.close()">Home</a>
+      <a mat-list-item routerLink="/dinner" (click)="sidenav.close()">Dinner</a>
+      <a mat-list-item routerLink="/favorites" (click)="sidenav.close()">Favorites</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container py-3">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
