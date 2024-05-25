@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { DinnerComponent } from './dinner/dinner.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -20,9 +21,8 @@ const routes: Routes = [
     component:RegisterComponent
   },
   {
-    path:'**',
-    pathMatch:'full',
-    redirectTo:''
+    path:'dinner',
+    component:DinnerComponent
   }
 
 ];

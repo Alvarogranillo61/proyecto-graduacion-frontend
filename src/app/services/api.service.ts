@@ -10,8 +10,9 @@ import { tap } from 'rxjs/operators';
 })
 export class ApiService {
   private token = '';
-  private jwtToken$ = new BehaviorSubject<string>(this.token);
+  public jwtToken$ = new BehaviorSubject<string>(this.token);
   private API_URL = 'http://localhost:3000/api';
+  private API = 'http://localhost:3000/api/auth';
 
   constructor(private http: HttpClient,
               private router: Router,
@@ -29,7 +30,6 @@ export class ApiService {
     return this.jwtToken$.asObservable();
   }
 
-  /* Getting All Todos */
   getAllTodos(): Observable<any> {
     return this.http.get(`${this.API_URL}/todos`, {
       headers: {
@@ -38,28 +38,8 @@ export class ApiService {
     });
   }
 
-  login(email: string, password: string) {
-    this.http.post<{ token: string }>(`${this.API_URL}/auth/login`, { email, password })
-      .subscribe((res) => {
-        this.token = res.token;
-
-        if (this.token) {
-          this.toast.success('Login successful, redirecting now...', '', {
-            timeOut: 700,
-            positionClass: 'toast-top-center'
-          }).onHidden.toPromise().then(() => {
-            this.jwtToken$.next(this.token);
-            localStorage.setItem('act', btoa(this.token));
-            this.router.navigateByUrl('/').then();
-          });
-        }
-      }, (err: HttpErrorResponse) => {
-        this.toast.error('Login failed', 'Error', {
-          timeOut: 3000,
-          positionClass: 'toast-top-center'
-        });
-        console.log(err.message);
-      });
+  login(email: string, password: string): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.API_URL}/auth/login`, { email, password });
   }
 
   logout() {
@@ -71,11 +51,10 @@ export class ApiService {
       localStorage.removeItem('act');
       this.router.navigateByUrl('/login').then();
     });
-    return '';
   }
 
   createRecipe(title: string, description: string, calories: number, meal: string) {
-    return this.http.post(`${this.API_URL}/todos`, { title, description,calories, meal }, {
+    return this.http.post(`${this.API_URL}/todos`, { title, description, calories, meal }, {
       headers: {
         Authorization: `Bearer ${this.token}`
       }
@@ -112,16 +91,8 @@ export class ApiService {
     );
   }
 
-  register(username: string, email:string, password: string) {
-
-    return this.http.post(`${this.API_URL}/auth/register`, {username, email, password}).pipe(
-      // @ts-ignore
-      catchError((err: HttpErrorResponse) => {
-        this.toast.error(err.error.message, '', {
-          timeOut: 1000
-        });
-      })
-    );
+  register(username: string, email: string, password: string): Observable<any> {
+    const payload = { username, email, password };
+    return this.http.post(`${this.API}/register`, payload);
   }
 }
-
