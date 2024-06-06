@@ -1,6 +1,5 @@
-// src/environments/environment.prod.ts
+// src/environments/environment.ts
 export const environment = {
-  production: true,
-  apiUrl: 'https://lobster-app-6xcst.ondigitalocean.app/api',  // Reemplaza con la URL real de tu backend en producción
-  // Otras configuraciones específicas para el entorno de producción
+  production: false,
+  apiUrl: 'http://localhost:3000/api'
 };
