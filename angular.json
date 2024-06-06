@@ -89,7 +89,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
+                  "with": "src/environments/environment.ts"
                 }
               ]
             }
@@ -100,10 +100,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "proyecto-graduacion-frontend:build:production"
+              "buildTarget": "proyecto-graduacion-frontend:build:production"
             },
             "development": {
-              "browserTarget": "proyecto-graduacion-frontend:build:development"
+              "buildTarget": "proyecto-graduacion-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
