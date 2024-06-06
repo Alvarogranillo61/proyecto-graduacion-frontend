@@ -4,6 +4,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +14,7 @@ import { tap } from 'rxjs/operators';
 export class ApiService {
   private token = '';
   public jwtToken$ = new BehaviorSubject<string>(this.token);
-  private API_URL = 'http://localhost:3000/api';
-  private API = 'http://localhost:3000/api/auth';
+  private API_URL = environment.apiUrl;
 
   constructor(private http: HttpClient,
               private router: Router,
@@ -100,7 +102,7 @@ export class ApiService {
 
   register(username: string, email: string, password: string): Observable<any> {
     const payload = { username, email, password };
-    return this.http.post(`${this.API}/register`, payload);
+    return this.http.post(`${this.API_URL}/auth/register`, payload);
   }
 
   getFavRecipes(): Observable<any> {
