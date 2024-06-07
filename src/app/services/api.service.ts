@@ -11,8 +11,8 @@ import { tap } from 'rxjs/operators';
 export class ApiService {
   private token = '';
   public jwtToken$ = new BehaviorSubject<string>(this.token);
-  private API_URL = 'http://localhost:3000/api';
-  private API = 'http://localhost:3000/api/auth';
+  private API_URL = 'https://clownfish-app-fa9vg.ondigitalocean.app/api';
+  private API = 'https://clownfish-app-fa9vg.ondigitalocean.app/api/auth';
 
   constructor(private http: HttpClient,
               private router: Router,
