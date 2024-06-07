@@ -11,8 +11,8 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
+  { path: '', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'recipes', component: RecipesComponent },
   { path: 'breakfast', component: BreakfastComponent },

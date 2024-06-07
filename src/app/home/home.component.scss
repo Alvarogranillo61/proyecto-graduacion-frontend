@@ -1,12 +1,21 @@
-.page-heading {
-  font-size: 3.5rem;
-  font-family: "! Jamiroquai !", sans-serif;
-  padding-top: 2rem;
-}
-.spacer {
-  flex: 1 1 auto;
+.container {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.status-text {
-  font-size: .8rem;
+.recipe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.recipe-card {
+  margin-bottom: 20px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

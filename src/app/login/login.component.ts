@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.jwtUserToken.subscribe(token => {
       if (token) {
-        this.router.navigateByUrl('/login').then();
+        this.router.navigateByUrl('/home').then();
       }
     });
   }
